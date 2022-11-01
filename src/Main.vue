@@ -104,6 +104,10 @@ const seq = computed(() => {
         }
     }
     seq_raw.value = seq_lit.join('')
+
+    if(seq_lit.length === 0)
+        return [0]
+
     return seq_lit.map(i => Number(i))
 })
 
@@ -117,6 +121,8 @@ const values = computed(() => {
         }
     }
     values_lit = [...new Set(values_lit)]
+    if(values_lit.length === 0)
+        return [0]
     values_raw.value = values_lit.join(',')
     return values_lit.map(i => Number(i))
 })
@@ -199,7 +205,6 @@ const probabilities = computed(() => {
             left++
         }
 
-        console.log(distribution, Xi, left)
         results[key] = {
             mean: mean,
             median: Math.sqrt(distribution[tests_count/2]),
